@@ -1,0 +1,82 @@
+1.看对cifar10数据集的操作，中间有distorted_inputs函数，翻阅了python源码，对图像
+ 翻转，图像色彩调整等有了新的理解，详见：https://blog.csdn.net/chaipp0607/article/details/73089910
+ 其中列举了很多图像处理的函数。
+2.tf.image.per_image_standardization:图片标准化函数，即像素值减去均值初一adjusted
+ 标准差，详见：https://blog.csdn.net/sinat_21585785/article/details/74251563
+3.tf.transpose：对矩阵进行转换操作，不是太懂，详见：
+ https://www.cnblogs.com/studyDetail/p/6533316.html
+ https://blog.csdn.net/u010417185/article/details/51900441
+4.tf.train.batch和tf.train.shuffle_batch：返回一个batch的样本和样本标签，
+ 详见：https://blog.csdn.net/wuguangbin1230/article/details/72810706
+5.tf.where()用法：tf.where(condition, x=None, y=None, name=None)：
+ condition，x，y有相同维度，condition是bool型值，True/False
+ 返回值是对应元素，condition中元素为True的元素替换为x中的元素，为False的元素替换
+ 为y中对应元素。
+ 详见：https://blog.csdn.net/ustbbsy/article/details/79564828
+6.tf.concat(concat_dim, values, name='concat')：连接两个矩阵，在哪一维上连接。
+ 详见：https://blog.csdn.net/mao_xiao_feng/article/details/53366163
+7.tf.less(x,y,name=None)：返回bool类型的张量，以元素方式返回(x<y)的真值。
+ 详见：https://www.w3cschool.cn/tensorflow_python/tensorflow_python-fw182f4x.html
+8.tf.clip_by_value(A,min,max)：输入一个张量A，把A中的每个元素值都压缩在min和max
+ 之间。小于min的让它等于min，大于max的让它等于max。
+ Clips tensor values to a specified min and max.
+ 详见：https://blog.csdn.net/jacke121/article/details/77747798
+9.tf.ones_like：create a tensor with all elements set to 1,保持type和shape不变。
+ 详见：https://blog.csdn.net/NockinOnHeavensDoor/article/details/80221498
+10.tf.stack(values,axis=0,name='stack'):Stacks a list of rank-'R' tensors into
+ one rank-'(R+1)'tensor.
+ 另补充tf.unstack函数，详见：https://www.jianshu.com/p/25706575f8d4
+11.终于理解了tensorflow的tensor的概念。花了差不多三个小时时间。tensor是tensorflow
+ 的核心，所以好好理解tensor对以后很有帮助。层层递进来解剖tensor。
+12.Saver的用法：我们常在训练完一个模型之后希望保存训练结果(即模型的参数)，以便
+ 下次迭代的训练或用作测试。因此提供了Saver类。
+ 一。Saver类提供了向checkpoints文件保存和从checkpoints文件中恢复变量的相关方法。
+ Checkpoints文件是一个二进制文件，它把变量名映射到对应的tensor值。
+ 二。只要提供一个计数器，当计数器触发时，Saver类可自动生成checkpoints文件。让
+ 我们在训练过程中保存多个中间结果。比如保存每步训练的结果。
+ 三。为了避免填满整个磁盘，Saver类可自动管理checkpoints文件。比如指定保存最近
+ N个Checkpoints文件。
+ Saves and restores variables.
+ 详见：https://blog.csdn.net/u011500062/article/details/51728830
+13.注意tf.reduce_mean()的用法：tf.reduce_mean(X,[0,1,2])是对X在0,1,2这三个维度
+ 合起来求解，不是单独分别对0,1,2三个维度求解。还有要注意X的数据类型，如果是整型
+ 那求得的结果也是整型，也就是说如果忽略了X的数据类型，可能会得到错误的结果。
+ Computes the mean of elements across dimensions of a tensor.
+ 实验程序如下：
+ import tensorflow as tf
+ a=[[1.,2.,3.],[4.,5.,6.]]
+ b=tf.reduce_mean(a,[0,1])
+ sess=tf.InteractiveSession()
+ tf.global_variables_initializer()
+ c=sess.run([b])
+ print(c)
+14.tf.nn.sigmoid_cross_entropy_with_logits(_sential=None,label=None,logits=None,
+ name=None)
+ Computes asigmoid cross entropy given 'logits'
+ Measures the probability error in discrete classification tasks in which each
+ class is independent and not mutally exclusive. 
+ For brevity, let 'x=logits', 'z=labels'. The logistic loss is
+ z*-log(sigmoid(x))+(1-z)*-log(1-sigmoid(x)）=…=x-x*z+log(1+exp(-x))
+ For x<0, to avoid overflow in exp(-x), we reformulate the above
+ x-x*z+log(1+exp(-x))=…=-x*z+log(1+exp(x))
+ Hence, to ensure stability and avoid overflow, the implementation uses this
+ equivalent formulation
+ max(x,0)-x*z+log(1+exp(-abs(x)))
+ 'logits' and 'labels' must have the same type and shape.
+ 注意：因为该函数对logits进行sigmoid计算，所以在神经网络的最后一层不需要对最后
+ 的结果再求sigmoid，避免重复。
+15.tf.summary.scalar(name,tensor,collection=None,family=None):Output a 'Summary'
+ protoccal buffer containing a single scalar value.
+16.tf.summary.merge_all(key='summaries'):Merges all summaries collected in the default graph.
+17.tf中的placeholder和feed_dict：Tf支持占位符placeholder。占位符没有初始值，它只
+ 会分配必要的内存。在会话中，占位符可以使用feed_dict馈送数据。feed_dict是一个字典
+ ，在字典中需要给出每个用到的占位符的取值。因为训练神经网络每次要提供一个批量的
+ 训练样本，若每次迭代选取的数据要通过常量表示，那么tf的计算图会非常大。因为每增加
+ 一个常量，tf都会在计算图中增加一个节点。
+18.tf.summary.FileWriter：Writes 'Summary' protocal buffers to event files.
+19.针对错误：ValueError: Variable D_W1 already exists, disallowed. Did you mean to 
+ set reuse=True or reuse=tf.AUTO_REUSE in VarScope? Originally defined at:
+ 即出现下面网站中提到的问题：https://blog.csdn.net/u012436149/article/details/53696970/
+ 问题是用tf.get_variable()时若检测到命名冲突，会报错。这里可以在后面的
+ with tf.variable_scope('layer1')这样的代码改为with tf.variable_scope('layer1',
+ reuse=tf.AUTO_REUSE)，这样就不会报错了

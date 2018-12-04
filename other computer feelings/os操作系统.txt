@@ -1,0 +1,4 @@
+1.python os.mkdir创建目录失败，改用makedirs，详见：
+https://blog.csdn.net/moses1994/article/details/77195663
+2.os.path.join():用于路径拼接文件路径。
+ 详见：https://blog.csdn.net/weixin_37895339/article/details/79185119

@@ -1,0 +1,5 @@
+1.https://blog.csdn.net/u010510350/article/details/72526821
+简介：pytorch是Facebook的AI团队发布的一个python工具包，专门针对GPU加速的DNN编程。
+pytorch最大优势是改进现有神经网络，提供了更快速的方法—不用从头重新构建整个网络，
+是因为pytorch采用动态计算图结构，不像tf、theano、caffe采用的静态计算图。
+torch被称为神经网络界的numpy，和numpy之间可进行自由的切换。
