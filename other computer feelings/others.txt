@@ -1,3 +1,50 @@
 1.URL：A Uniform Resource Locator(URL), colloquially termed a web address, is a
- reference to a web resource that specifies its loccation on a computer and a 
+ reference to a web resource that specifies its location on a computer and a 
  mechanism for retrieving it.
+2.github使用(windows下建立远程仓库、创建本地仓库、关联远程仓库和本地仓库、提交
+ 和删除github上远程仓库的文件)：
+ 2.1创建本地仓库：
+ 1)在github上注册账号；
+ 2)在需要建立仓库的目录下新建一个learngit文件夹，命令如下：
+ 在上一级目录下打开Git Bash，输入
+ mkdir learngit
+ cd ./learngit/
+ 3)初始化本地仓库，命令如下：
+ git init
+ 4)设置全局用户，主要设置用户名和邮箱，命令如下：
+ git config --global user.name '***'
+ git config --global user.email '***'
+ 5)添加一个文件到该文件夹(本地仓库)中，命令如下：
+ touch README.txt
+ git add README.txt
+ 2.2创建远程仓库：
+ 在github上操作即可
+ 2.3设置密钥：
+ 1)建立ssh密钥，命令如下：
+ ls -al ~/.ssh
+ ssh-keygen -t rsa -C 'your email address'
+ 然后设置密码
+ 2)在用户主目录.ssh文件夹下找到后缀为.pub的公钥文件，用文本编辑器打开并将其所有
+ 内容复制下来
+ 3)在github设置界面找到SSH keys，点击Add SSH key，粘贴之前复制的内容，然后点击
+ Add key
+ 4)然后回到git bash，输入如下命令检测能否连接github：
+ ssh -T git@github.com
+ 2.4关联远程仓库和本地仓库
+ git commit -m 'create a file named readme.txt'
+ git remote add origin git@github.com:***/learngit.git
+ 以上部分详见https://www.cnblogs.com/wzd5230/p/4906448.html
+ 2.5提交项目(代码)Fragment项目(代码)文件到github(远程仓库)上，命令如下：
+ git add Fragment  #(注意如果文件的名字中间有空格，要在两个单词中间加上'\ '，否则
+ 会报错)
+ git commit -m '***'
+ git push origin master
+ 2.6删除远程仓库的文件(文件夹)，命令如下：
+ git rm -r '***' #(删除文件夹，注意如果文件的名字中间有空格，要在两个单词中间加上'\ '，
+ 否则会报错)
+ 或者
+ git rm '***' #(删除文件，注意如果文件的名字中间有空格，要在两个单词中间加上'\ '，否则
+ 会报错)
+ git commit -m '***'
+ git push origin master
+ 
