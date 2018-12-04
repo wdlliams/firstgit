@@ -47,4 +47,10 @@
  会报错)
  git commit -m '***'
  git push origin master
+ 2.7如果想同步已上传到github远程仓库的修改过的文件，可用命令如下：
+ git add *
+ git commit -m '***'
+ git push origin master
+ 以后主要用到2.5-2.7这三块，本地仓库可以直接改不需要输入命令，远程仓库需要通过输入
+ 命令修改
  
