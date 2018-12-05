@@ -1,55 +1,55 @@
-1.学到了读取txt文件的函数readline，详见:https://blog.csdn.net/supergiser_lee/article/details/60571983
-2.__init__.py文件的作用：一是package的标识，不能删除；二是定义package中的__all__，
- 用来模糊导入，三是它是一个python文件，可以用来写python模块，但要保证__init__.py
- 足够轻。详见：https://www.cnblogs.com/AlwinXu/p/5598543.html
-3.python在执行import语句时，执行了如下操作：
- 一。创建一个新的，空的module对象
- 二。把这个module对象插入sys.module中
- 三。装载module的代码
- 四。执行新的module中对应的代码
- 其中，第三步中要找到module程序所在的位置，即找到搜索的顺序，为：
- 当前路径（以及从当前目录制定的sys.path）,然后是PYTHONPATH，然后是python的安装
- 设置相关的默认路径。
- 如此，就可以先构建一个package，以普通module方式导入，就可以直接访问package中
- 各个module了。
- python中package定义简单，其层次结构与程序所在目录的层次结构相同，这点与Java相似，
- 唯一不同的地方在于，python中package必须包含一个__init__.py文件。
- 详见：https://blog.csdn.net/yuyangyg/article/details/79578435
-4.sys——system-speicfic parameters and functions
-5.编译是把高级语言变成计算机可以识别的二进制语言。对应于编译语言。另外还有一种
- 直译语言。编译语言有C，C++；直译语言有python等。
-6.大概的python基本运行机制：python程序运行时不需要编译成二进制代码，二位直接从
- 源码运行程序，简单说是python编译器将源码转换为字节码，然后由解释器执行这些字节码
- 解释器具体工作：
- 一。完成模块的加载和链接；
- 二。将源代码便以为PyCodeObject对象（即字节码），写入内存中，供CPU读取；
- 三。从内存中读取并执行，结束后将PyCodeObject写回硬盘当中，也就是复制到.pyc或
- .pyo文件中，以保存当前目录下所有脚本的字节码文件。
- 之后若再次执行该脚本，先检查【本地是否有上述字节码文件】和【该字节码文件的修
- 改时间是否在其源文件之后】，是就直接执行，否则重复上述步骤。
- 于是，__pycache__文件夹的意义在于：第一次执行代码的时候，python编译器已经把
- 编译的字节码放在__pycache__文件夹中，这样以后再次运行的话，如果被调用的模块
- 未发生变化，那就直接跳过编译这一步，直接去__pycache__文件夹中去运行相关的*.pyc
- 文件，大大缩短了项目运行前的准备时间。
-7.何时运行python代码目录后会生成__pycache__文件：运行的当前脚本（__main__）
- 不会生成pycache，被import的那些modules才会
-8.python shell：python交互模式，逐行输入语句并执行
-9.python module和package：为了编写可维护的代码，把很多函数分组，分布放到不同的
- 文件里，这样，每个文件包含的代码相对较少。在python中，一个.py文件就称为一个模块。
- 这样产生一个问题，若不同人编写的模块名相同怎么办？为了避免模块名冲突，python
- 引入按目录组织模块的方法，称为包(package)。个人感觉包是模块的一个补充。
- 详见：https://blog.csdn.net/qiqicos/article/details/79208039
-10.如何查看python内置函数的实现代码，
- 详见：https://www.cnblogs.com/ylHe/p/8621786.html
-11.python中self的含义(不懂)：self代表类的实例，而非类；self不必非写成self；self
- 在定义时不可以省略；在继承时，传入的是哪个实例，就是那个传入的实例，而不是指
- 定义了self的类的实例；在描述类中，self指的是描述符类的实例。
- 详见：https://blog.csdn.net/daocaoren1543169565/article/details/80626035
-12.python单行、多行注释符号使用方法及规范，单行用#，批量多行用三对单引号或双引号
-13.用tensorflow编写gan在mnist上实现的程序，知道了如何查看并复制python路径：打开
-文件，edit--copy path,python文件空白处,edit—paste
-14.conda是一个开源的软件包管理系统和环境管理系统，用于安装多个版本的软件包及其
-依赖关系，并在他们之间轻松切换。(package, dependency and environment management
+1.ѧ���˶�ȡtxt�ļ��ĺ���readline�����:https://blog.csdn.net/supergiser_lee/article/details/60571983
+2.__init__.py�ļ������ã�һ��package�ı�ʶ������ɾ�������Ƕ���package�е�__all__��
+ ����ģ�����룬��������һ��python�ļ�����������дpythonģ�飬��Ҫ��֤__init__.py
+ �㹻�ᡣ�����https://www.cnblogs.com/AlwinXu/p/5598543.html
+3.python��ִ��import���ʱ��ִ�������²�����
+ һ������һ���µģ��յ�module����
+ ���������module�������sys.module��
+ ����װ��module�Ĵ���
+ �ġ�ִ���µ�module�ж�Ӧ�Ĵ���
+ ���У���������Ҫ�ҵ�module�������ڵ�λ�ã����ҵ�������˳��Ϊ��
+ ��ǰ·�����Լ��ӵ�ǰĿ¼�ƶ���sys.path��,Ȼ����PYTHONPATH��Ȼ����python�İ�װ
+ ������ص�Ĭ��·����
+ ��ˣ��Ϳ����ȹ���һ��package������ͨmodule��ʽ���룬�Ϳ���ֱ�ӷ���package��
+ ����module�ˡ�
+ python��package����򵥣����νṹ���������Ŀ¼�Ĳ�νṹ��ͬ�������Java���ƣ�
+ Ψһ��ͬ�ĵط����ڣ�python��package�������һ��__init__.py�ļ���
+ �����https://blog.csdn.net/yuyangyg/article/details/79578435
+4.sys����system-speicfic parameters and functions
+5.�����ǰѸ߼����Ա�ɼ��������ʶ��Ķ��������ԡ���Ӧ�ڱ������ԡ����⻹��һ��
+ ֱ�����ԡ�����������C��C++��ֱ��������python�ȡ�
+6.��ŵ�python�������л��ƣ�python��������ʱ����Ҫ����ɶ����ƴ��룬��λֱ�Ӵ�
+ Դ�����г��򣬼�˵��python��������Դ��ת��Ϊ�ֽ��룬Ȼ���ɽ�����ִ����Щ�ֽ���
+ ���������幤����
+ һ�����ģ��ļ��غ����ӣ�
+ ������Դ�������ΪPyCodeObject���󣨼��ֽ��룩��д���ڴ��У���CPU��ȡ��
+ �������ڴ��ж�ȡ��ִ�У�������PyCodeObjectд��Ӳ�̵��У�Ҳ���Ǹ��Ƶ�.pyc��
+ .pyo�ļ��У��Ա��浱ǰĿ¼�����нű����ֽ����ļ���
+ ֮�����ٴ�ִ�иýű����ȼ�顾�����Ƿ��������ֽ����ļ����͡����ֽ����ļ�����
+ ��ʱ���Ƿ�����Դ�ļ�֮�󡿣��Ǿ�ֱ��ִ�У������ظ��������衣
+ ���ǣ�__pycache__�ļ��е��������ڣ���һ��ִ�д����ʱ��python�������Ѿ���
+ ������ֽ������__pycache__�ļ����У������Ժ��ٴ����еĻ�����������õ�ģ��
+ δ�����仯���Ǿ�ֱ������������һ����ֱ��ȥ__pycache__�ļ�����ȥ������ص�*.pyc
+ �ļ��������������Ŀ����ǰ��׼��ʱ�䡣
+7.��ʱ����python����Ŀ¼�������__pycache__�ļ������еĵ�ǰ�ű���__main__��
+ ��������pycache����import����Щmodules�Ż�
+8.python shell��python����ģʽ������������䲢ִ��
+9.python module��package��Ϊ�˱�д��ά���Ĵ��룬�Ѻܶຯ�����飬�ֲ��ŵ���ͬ��
+ �ļ��������ÿ���ļ������Ĵ�����Խ��١���python�У�һ��.py�ļ��ͳ�Ϊһ��ģ�顣
+ ��������һ�����⣬����ͬ�˱�д��ģ������ͬ��ô�죿Ϊ�˱���ģ������ͻ��python
+ ���밴Ŀ¼��֯ģ��ķ�������Ϊ��(package)�����˸о�����ģ���һ�����䡣
+ �����https://blog.csdn.net/qiqicos/article/details/79208039
+10.��β鿴python���ú�����ʵ�ִ��룬
+ �����https://www.cnblogs.com/ylHe/p/8621786.html
+11.python��self�ĺ���(����)��self�������ʵ���������ࣻself���ط�д��self��self
+ �ڶ���ʱ������ʡ�ԣ��ڼ̳�ʱ����������ĸ�ʵ���������Ǹ������ʵ����������ָ
+ ������self�����ʵ�������������У�selfָ�������������ʵ����
+ �����https://blog.csdn.net/daocaoren1543169565/article/details/80626035
+12.python���С�����ע�ͷ���ʹ�÷������淶��������#���������������Ե����Ż�˫����
+13.��tensorflow��дgan��mnist��ʵ�ֵĳ���֪������β鿴������python·������
+�ļ���edit--copy path,python�ļ��հ״�,edit��paste
+14.conda��һ����Դ������������ϵͳ�ͻ�������ϵͳ�����ڰ�װ����汾������������
+������ϵ����������֮�������л���(package, dependency and environment management
 for any language...Conda is an open source package management system and 
 environment management systemthat runs on Windows, macOS and Linux. Conda 
 quickly installs, runs and updates packages and their dependencies. Conda easily 
@@ -59,8 +59,4 @@ any language...Conda as a package manager helps you find and install pakages. If
 you need a package that requires a different version of Python, you do not need to 
 switch to a different environment manager, because conda is also an environment 
 manager)
-<<<<<<< HEAD
 15.itertools�⣺Functional tools for creating and using iterations.
-=======
-15.itertools库：Functional tools for creating and using iterations.
->>>>>>> origin/master
