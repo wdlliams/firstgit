@@ -60,3 +60,7 @@ you need a package that requires a different version of Python, you do not need 
 switch to a different environment manager, because conda is also an environment 
 manager)
 15.itertools¿â£ºFunctional tools for creating and using iterations.
+16.imageio¿â£ºImageio is a Python library that provides an easy interface to read 
+and write a wide range of image data, including animated images, volumetric data,
+and scientific formats.
+17.pickle¿â£ºCreate portable serialized representations of Python objects.
