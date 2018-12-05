@@ -59,3 +59,4 @@ any language...Conda as a package manager helps you find and install pakages. If
 you need a package that requires a different version of Python, you do not need to 
 switch to a different environment manager, because conda is also an environment 
 manager)
+15.itertools¿â£ºFunctional tools for creating and using iterations.
