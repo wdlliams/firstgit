@@ -53,4 +53,14 @@
  git push origin master
  以后主要用到2.5-2.7这三块，本地仓库可以直接改不需要输入命令，远程仓库需要通过输入
  命令修改
+3.github错误：On branch master
+ Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+ nothing to commit, working tree clean
+ 运行命令：
+ git fetch origin
+ git merge origin/master
+ 再push
+
  
