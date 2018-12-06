@@ -47,9 +47,9 @@ def generator(z,y): #和原始gan相比多余的condition y
     return G_prob
 def sample_Z(m,n):
     return np.random.uniform(-1.,1.,size=[m,n])
-G_sample=generator(Z,y)
-D_real,D_logit_real=discriminator(X,y)
-D_fake,D_logit_fake=discriminator(G_sample,y)
+G_sample=generator(Z,y) #和原始gan相比多余的condition y
+D_real,D_logit_real=discriminator(X,y) #和原始gan相比多余的condition y
+D_fake,D_logit_fake=discriminator(G_sample,y) #和原始gan相比多余的condition y
 D_loss_real=tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_real,labels=tf.ones_like(D_logit_real)))
 D_loss_fake=tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_fake,labels=tf.zeros_like(D_logit_fake)))
 D_loss=D_loss_real+D_loss_fake
